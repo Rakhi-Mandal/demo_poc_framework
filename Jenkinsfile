@@ -41,6 +41,7 @@ pipeline {
         script {
           def headedArg = params.HEADED ? '--headed' : ''
           def browserArg = "--project=${params.BROWSER}"
+          def suiteTarget = params.TARGET.trim()
           def target = params.EXECUTION_MODE == 'suite'
               ? (suiteTarget == 'sanity' ? 'sanity/**/*.spec.js' : 'regression/**/*.spec.js')
               : suiteTarget
