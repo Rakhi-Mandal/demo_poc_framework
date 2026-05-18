@@ -37,22 +37,32 @@ pipeline {
     }
 
     stage('Run Tests') {
-      steps {
-        script {
-          def headedArg = params.HEADED ? '--headed' : ''
-          def browserArg = "--project=${params.BROWSER}"
-          def suiteTarget = params.TARGET.trim()
-          def target = params.EXECUTION_MODE == 'suite'
-              ? (suiteTarget == 'sanity' ? 'sanity' : 'regression')
-              : suiteTarget
-            def command = 'npx playwright test "' + target + '" ' + browserArg
-            if (headedArg) {
-              command = command + ' ' + headedArg
-            }
-            powershell(command)
-        }
+  steps {
+    script {
+
+      currentBuild.displayName =
+        "#${BUILD_NUMBER} | ${params.EXECUTION_MODE} | ${params.TARGET} | ${params.BROWSER}"
+
+      def headedArg = params.HEADED ? '--headed' : ''
+      def browserArg = "--project=${params.BROWSER}"
+      def suiteTarget = params.TARGET.trim()
+
+      def target = params.EXECUTION_MODE == 'suite'
+          ? (suiteTarget == 'sanity' ? 'sanity' : 'regression')
+          : suiteTarget
+
+      def command = 'npx playwright test "' + target + '" ' + browserArg
+
+      if (headedArg) {
+        command = command + ' ' + headedArg
       }
+
+      echo "Running command: ${command}"
+
+      powershell(command)
     }
+  }
+}
   }
 
   post {
