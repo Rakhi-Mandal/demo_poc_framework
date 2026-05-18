@@ -42,9 +42,12 @@ pipeline {
           def headedArg = params.HEADED ? '--headed' : ''
           def browserArg = "--project=${params.BROWSER}"
           def target = params.TARGET.trim()
-          powershell(
-            "npx playwright test "${target}" ${browserArg} ${headedArg}"
-          )
+          def command = 'npx playwright test "' + target + '" ' + browserArg
+            if (headedArg) {
+              command = command + ' ' + headedArg
+            }
+
+            powershell(command)
         }
       }
     }
