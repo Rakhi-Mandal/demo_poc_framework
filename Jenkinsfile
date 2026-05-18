@@ -41,12 +41,13 @@ pipeline {
         script {
           def headedArg = params.HEADED ? '--headed' : ''
           def browserArg = "--project=${params.BROWSER}"
-          def target = params.TARGET.trim()
+          def target = params.EXECUTION_MODE == 'suite'
+              ? (suiteTarget == 'sanity' ? 'sanity/**/*.spec.js' : 'regression/**/*.spec.js')
+              : suiteTarget
           def command = 'npx playwright test "' + target + '" ' + browserArg
             if (headedArg) {
               command = command + ' ' + headedArg
             }
-
             powershell(command)
         }
       }
