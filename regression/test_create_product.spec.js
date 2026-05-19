@@ -1,16 +1,5 @@
 import { test, expect } from '@playwright/test';
 
-const testData = {
-  url: 'https://prep.kala.ink/login',
-  email: 'kishore.b@feuji.com',
-  password: 'Testauto@21',
-  customerName: 'customcus1',
-  customerpat: '787',
-  brand: 'brand',
-  odnum: '77',
-  uomnum: '66',
-  desc: 'desc added',
-};
 
 test('create product @sanity', async ({ page }) => {
 

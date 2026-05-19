@@ -3,6 +3,7 @@ import { test, expect } from '@playwright/test';
 
 test('generated flow @sanity', async ({ page }) => {
   await page.goto(testData.url);
+  await expect(page).toHaveURL(testData.url);
   await page.waitForLoadState('domcontentloaded');
 
   await expect(page.getByRole('button', { name: 'Sign in with Email', exact: true })).toBeEnabled();
