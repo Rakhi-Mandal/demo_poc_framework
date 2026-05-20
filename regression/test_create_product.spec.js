@@ -1,5 +1,5 @@
+import testData from '../test-data.json';
 import { test, expect } from '@playwright/test';
-
 
 test('create product @sanity', async ({ page }) => {
 
@@ -33,28 +33,16 @@ test('create product @sanity', async ({ page }) => {
 
   // Select Customer
   await page.getByRole('button', { name: 'Select Customer' }).click();
-
-  await page.locator('input[name="filters.searchByName"]')
-    .fill(testData.customerName);
-
-  await page.locator('input[name="customerSelectedId"]')
-    .first()
-    .check();
-
+  await page.locator('input[name="filters.searchByName"]').fill(testData.customerNameProduct);
+  await page.locator('input[name="customerSelectedId"]').first().check();
   await page.getByRole('button', { name: 'Continue' }).click();
 
   // Product Details
   await page.getByRole('textbox', { name: 'Select a Product Class' }).click();
   await page.getByText('Blank Label').click();
-
-  await page.getByRole('textbox', { name: 'Customer Part Number' })
-    .fill(testData.customerpat);
-
-  await page.getByRole('textbox', { name: 'Brand Name' })
-    .fill(testData.brand);
-
-  await page.getByRole('spinbutton', { name: 'Max OD (inches)' })
-    .fill(testData.odnum);
+  await page.getByRole('textbox', { name: 'Customer Part Number' }).fill(testData.customerpat);
+  await page.getByRole('textbox', { name: 'Brand Name' }).fill(testData.brand);
+  await page.getByRole('spinbutton', { name: 'Max OD (inches)' }).fill(testData.odnum);
 
   // Select Substrate
   await page.getByRole('textbox', { name: 'Select Substrate' }).click();
@@ -77,17 +65,13 @@ test('create product @sanity', async ({ page }) => {
   await page.getByText('Meters').click();
 
   // Quantity
-  await page.getByRole('spinbutton', { name: 'Quantity in Sales UOM' })
-    .fill(testData.uomnum);
+  await page.getByRole('spinbutton', { name: 'Quantity in Sales UOM' }).fill(testData.uomnum);
 
   // Description
-  await page.getByRole('textbox', { name: 'Description' })
-    .fill(testData.desc);
+  await page.getByRole('textbox', { name: 'Description' }).fill(testData.desc);
 
   // Checkbox
-  await page.getByRole('checkbox', { name: 'C of C Required' })
-    .first()
-    .check();
+  await page.getByRole('checkbox', { name: 'C of C Required' }).first().check();
 
   // Select Category
   await page.getByRole('textbox', { name: 'Select a category' }).click();
@@ -101,12 +85,6 @@ test('create product @sanity', async ({ page }) => {
 
   // Logout
   await page.getByRole('button', { name: 'Links' }).click();
-
-  await page.getByRole('button', {
-    name: 'Kishore Battula Fortis Solutions Group'
-  }).click();
-
+  await page.getByRole('button', {name: 'Kishore Battula Fortis Solutions Group'}).click();
   await page.getByRole('link', { name: 'Logout' }).click();
-
-  await page.waitForLoadState('domcontentloaded');
 });

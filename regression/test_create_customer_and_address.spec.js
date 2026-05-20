@@ -1,8 +1,9 @@
+import testData from '../test-data.json';
 import { test, expect } from '@playwright/test';
 
-test('2026 05 15T08 49 10', async ({ page }) => {
+test('create customer add address and edit details', async ({ page }) => {
   // 1. Go to login page
-  await page.goto('https://prep.kala.ink/login');
+  await page.goto(testData.url);
   await page.waitForLoadState('domcontentloaded');
 
   const signInWithEmailButton = page.getByRole('button', { name: 'Sign in with Email', exact: true });
@@ -12,12 +13,12 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   const emailInput = page.locator('input[name="email"][type="email"]');
   await expect(emailInput).toBeVisible();
   await expect(emailInput).toBeEditable();
-  await emailInput.fill('kishore.b@feuji.com');
+  await emailInput.fill(testData.email);
 
   const passwordInput = page.locator('input[name="password"][type="password"]');
   await expect(passwordInput).toBeVisible();
   await expect(passwordInput).toBeEditable();
-  await passwordInput.fill('Testauto@21');
+  await passwordInput.fill(testData.password);
 
   const signInConfirmButton = page.getByRole('button', { name: 'Sign in with Email', exact: true });
   await expect(signInConfirmButton).toBeEnabled();
@@ -42,7 +43,7 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   const customerNameInput = page.locator('input[name="customer.name"][type="text"]');
   await expect(customerNameInput).toBeVisible();
   await expect(customerNameInput).toBeEditable();
-  await customerNameInput.fill('test_hfgnf');
+  await customerNameInput.fill(testData.customerNameContact2);
 
   const marketInput = page.locator('[data-cy="customerCreateSelectMarket"]');
   await expect(marketInput).toBeVisible();
@@ -93,11 +94,11 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   const websiteInput = page.locator('input[name="customer.website"][type="text"]');
   await expect(websiteInput).toBeVisible();
   await expect(websiteInput).toBeEditable();
-  await websiteInput.fill('https://www.amazon.in/');
+  await websiteInput.fill(testData.customerWebsite);
    const dunsInput = page.locator('input[name="customer.duns_number"][type="text"]');
   await expect(dunsInput).toBeVisible();
   await expect(dunsInput).toBeEditable();
-  await dunsInput.fill('78778');
+  await dunsInput.fill(testData.customerDunsNumber);
 
   const tierInput = page.getByPlaceholder('Select a Tier').first();
   await expect(tierInput).toBeVisible();
@@ -109,10 +110,6 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   await expect(communityOption).toBeEnabled();
   await communityOption.click();
   await page.waitForTimeout(5000);
-
-  // const continueButton3 = page.getByRole('button', { name: 'Continue', exact: true });
-  // await expect(continueButton3).toBeEnabled();
-  // await continueButton3.click();
 
  const selectUserButton1 = page.getByRole('button', { name: 'Select User', exact: true }).nth(0);
   await expect(selectUserButton1).toBeEnabled();
@@ -148,7 +145,7 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   await expect(customerEditSaveButton).toBeEnabled();
   await customerEditSaveButton.click();
   await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(15000);
+  await page.waitForTimeout(3000);
   
   const newAddressButton = page.getByRole('button', { name: 'New Address', exact: true }).nth(1);
   await expect(newAddressButton).toBeEnabled();
@@ -159,27 +156,27 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   const companyInput = page.locator('input[name="address.company"][type="text"]');
   await expect(companyInput).toBeVisible();
   await expect(companyInput).toBeEditable();
-  await companyInput.fill('qaz');
+  await companyInput.fill(testData.customerCompany);
 
   const attentionInput = page.locator('input[name="address.attention"][type="text"]');
   await expect(attentionInput).toBeVisible();
   await expect(attentionInput).toBeEditable();
-  await attentionInput.fill('atten');
+  await attentionInput.fill(testData.customerAttention);
 
   const addressLineOneInput = page.locator('input[name="address.address_line_one"][type="text"]');
   await expect(addressLineOneInput).toBeVisible();
   await expect(addressLineOneInput).toBeEditable();
-  await addressLineOneInput.fill('jkshsn');
+  await addressLineOneInput.fill(testData.customerAddressLine1);
 
   const addressLineTwoInput = page.locator('input[name="address.address_line_two"][type="text"]');
   await expect(addressLineTwoInput).toBeVisible();
   await expect(addressLineTwoInput).toBeEditable();
-  await addressLineTwoInput.fill('hhshs');
+  await addressLineTwoInput.fill(testData.customerAddressLine2);
 
   const cityInput = page.locator('input[name="address.city"][type="text"]');
   await expect(cityInput).toBeVisible();
   await expect(cityInput).toBeEditable();
-  await cityInput.fill('city');
+  await cityInput.fill(testData.customerCity);
 
   const stateInput = page.getByPlaceholder('Select a State/Province').first();
   await expect(stateInput).toBeVisible();
@@ -194,17 +191,17 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   const postalCodeInput = page.locator('input[name="address.postal_code"][type="text"]');
   await expect(postalCodeInput).toBeVisible();
   await expect(postalCodeInput).toBeEditable();
-  await postalCodeInput.fill('560001');
+  await postalCodeInput.fill(testData.customerPostalCode);
 
   const phoneInput = page.locator('input[name="address.phone_number"][type="phone"]');
   await expect(phoneInput).toBeVisible();
   await expect(phoneInput).toBeEditable();
-  await phoneInput.fill('+7766');
+  await phoneInput.fill(testData.customerPhone);
 
   const addressLabelInput = page.locator('input[name="address.address_label"][type="text"]');
   await expect(addressLabelInput).toBeVisible();
   await expect(addressLabelInput).toBeEditable();
-  await addressLabelInput.fill('addre');
+  await addressLabelInput.fill(testData.customerAddressLabel);
 
   const billingAddressCheckbox = page.locator('#addressbilling-addressbilling-billing-address');
   await expect(billingAddressCheckbox).toBeVisible();
@@ -229,134 +226,6 @@ test('2026 05 15T08 49 10', async ({ page }) => {
   await saveAddressButton.click({ force: true });
 
   await page.waitForLoadState('domcontentloaded');
-  await page.waitForTimeout(7000);
-
-//   await expect(
-//     page.getByRole('button', {
-//       name: 'Link Contact',
-//       exact: true
-//     })
-//   ).toBeEnabled();
-
-//   await page.getByRole('button', {
-//     name: 'Link Contact',
-//     exact: true
-//   }).click();
-//   await page.waitForTimeout(13000);
-//   const contactCheckbox = page.locator('#checkbox\\.input\\.13');
-
-//   await expect(contactCheckbox).toBeVisible();
-
-//   await contactCheckbox.check();
-
-//   await page.waitForTimeout(5000);
-//   await page.waitForLoadState('domcontentloaded');
-//   const continueButton7 = page.getByRole('button', { name: 'Continue', exact: true });
-//   await expect(continueButton7).toBeEnabled();
-//   await continueButton7.click();
-
-//  const newNoteButton = page
-//   .getByRole('button', {
-//     name: 'New Note',
-//     exact: true
-//   })
-//   .nth(1);
-
-// await expect(newNoteButton).toBeVisible();
-
-// await expect(newNoteButton).toBeEnabled({
-//   timeout: 15000
-// });
-
-// await newNoteButton.click();
-
-//   const noteEditor = page.locator('.ql-editor');
-
-//   await expect(noteEditor).toBeVisible();
-
-//   await noteEditor.fill('test_demo');
-
-//   const saveButton = page
-//   .locator('button[wire\\:click="create"]')
-//   .last();
-
-//   await expect(saveButton).toBeVisible({
-//   timeout: 15000
-//   });
-
-//   await saveButton.click();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // const settingsTabButton = page.getByRole('button', { name: 'Settings', exact: true });
-  // await expect(settingsTabButton).toBeVisible();
-  // await expect(settingsTabButton).toBeEnabled();
-  // await settingsTabButton.click();
-
-  // const linksTabButton = page.getByRole('button', { name: 'Links', exact: true });
-  // await expect(linksTabButton).toBeVisible();
-  // await expect(linksTabButton).toBeEnabled();
-  // await linksTabButton.click();
-
-  // const artworkTabButton = page.getByRole('button', { name: 'Artwork', exact: true });
-  // await expect(artworkTabButton).toBeVisible();
-  // await expect(artworkTabButton).toBeEnabled();
-  // await artworkTabButton.click();
-
-  // const userMenuButton = page.getByRole('button', { name: 'Kishore Battula Fortis Solutions Group', exact: true });
-  // await expect(userMenuButton).toBeEnabled();
-  // await userMenuButton.click();
-
-  // const logoutLink = page.getByRole('link', { name: 'Logout', exact: true });
-  // await expect(logoutLink).toBeVisible();
-  // await expect(logoutLink).toBeEnabled();
-  // await logoutLink.click();
-
-  // await page.waitForLoadState('domcontentloaded');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
 });
 

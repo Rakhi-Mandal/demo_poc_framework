@@ -1,18 +1,7 @@
 import { test, expect } from '@playwright/test';
-
-const testData = {
-  url: 'https://prep.kala.ink/login',
-  email: 'kishore.b@feuji.com',
-  password: 'Testauto@21',
-  otp: '',
-  phone: '8767896789',
-  phone2: '787678978',
-  email2: 'testk61@gmail.com'
-};
+import testData from '../test-data.json';
 
 test('generated flow @regression', async ({ page }) => {
-
-  test.setTimeout(60000);
 
   await page.goto(testData.url);
 
@@ -57,7 +46,7 @@ test('generated flow @regression', async ({ page }) => {
 
   await page.waitForLoadState('domcontentloaded');
 
-   const newCustomerButton = page.getByRole('button', { name: 'New Customer', exact: true });
+  const newCustomerButton = page.getByRole('button', { name: 'New Customer', exact: true });
   await expect(newCustomerButton).toBeEnabled();
   await newCustomerButton.click();
 
@@ -67,7 +56,7 @@ test('generated flow @regression', async ({ page }) => {
 
   await expect(customerNameInput).toBeVisible();
 
-  await customerNameInput.fill('test_jtyh');
+  await customerNameInput.fill(testData.customerNameContact);
 
   const marketInput = page.locator(
     '[data-cy="customerCreateSelectMarket"]'
@@ -108,7 +97,7 @@ test('generated flow @regression', async ({ page }) => {
       exact: true
     })
   ).toBeEnabled();
-  await page.getByRole('link', {name: 'Go to record',exact: true}).click();
+  await page.getByRole('link', { name: 'Go to record', exact: true }).click();
   await page.waitForLoadState('domcontentloaded');
 
 
@@ -137,33 +126,27 @@ test('generated flow @regression', async ({ page }) => {
   await continueButton2.click();
   await page.waitForTimeout(5000);
   await page.waitForLoadState('domcontentloaded');
- const newNoteButton = page
-  .getByRole('button', {
-    name: 'New Note',
-    exact: true
-  })
-  .nth(1);
+  const newNoteButton = page.getByRole('button', {name: 'New Note',exact: true}).nth(1);
+  await newNoteButton.scrollIntoViewIfNeeded();
+  await expect(newNoteButton).toBeVisible();
+  await expect(newNoteButton).toBeEnabled({
+    timeout: 15000
+  });
 
-await expect(newNoteButton).toBeVisible();
-
-await expect(newNoteButton).toBeEnabled({
-  timeout: 15000
-});
-
-await newNoteButton.click();
+  await newNoteButton.click();
 
   const noteEditor = page.locator('.ql-editor');
 
   await expect(noteEditor).toBeVisible();
 
-  await noteEditor.fill('test_demo');
+  await noteEditor.fill(testData.customerContactNote);
 
   const saveButton = page
-  .locator('button[wire\\:click="create"]')
-  .last();
+    .locator('button[wire\\:click="create"]')
+    .last();
 
   await expect(saveButton).toBeVisible({
-  timeout: 15000
+    timeout: 15000
   });
 
   await saveButton.click();

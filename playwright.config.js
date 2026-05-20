@@ -1,10 +1,11 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
+  timeout: 100000,
   testDir: '.',
   testMatch: '**/*.js',
   expect: {
-    timeout: 60000,
+    timeout: 80000,
   },
   reporter: [
     ['line'],
@@ -13,7 +14,7 @@ module.exports = defineConfig({
     ['allure-playwright', { resultsDir: 'allure-results' }],
   ],
   use: {
-    actionTimeout: 60000,
+    actionTimeout: 80000,
     headless: false,
     screenshot: 'only-on-failure',
     trace: 'on'

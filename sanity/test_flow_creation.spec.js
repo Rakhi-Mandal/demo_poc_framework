@@ -42,7 +42,7 @@ test('generated flow @sanity', async ({ page }) => {
   const customerNameInput = page.locator('input[name="customer.name"][type="text"]');
   await expect(customerNameInput).toBeVisible();
   await expect(customerNameInput).toBeEditable();
-  await customerNameInput.fill('test_ficftgh');
+  await customerNameInput.fill(testData.customerNameFlow);
 
   const marketInput = page.locator('[data-cy="customerCreateSelectMarket"]');
   await expect(marketInput).toBeVisible();
@@ -74,17 +74,17 @@ test('generated flow @sanity', async ({ page }) => {
   const websiteInput = page.locator('input[name="customer.website"][type="text"]');
   await expect(websiteInput).toBeVisible();
   await expect(websiteInput).toBeEditable();
-  await websiteInput.fill('https:www.amazon.com');
+  await websiteInput.fill(testData.customerWebsite);
 
   const dunsNumberInput = page.locator('input[name="customer.duns_number"][type="text"]');
   await expect(dunsNumberInput).toBeVisible();
   await expect(dunsNumberInput).toBeEditable();
-  await dunsNumberInput.fill('7');
+  await dunsNumberInput.fill(testData.customerDunsNumber);
 
   await expect(page.getByRole('textbox', { name: 'Select a Tier', exact: true })).toBeEnabled();
   await page.getByRole('textbox', { name: 'Select a Tier', exact: true }).click();
-  await expect(page.locator('li[data-label="Growth"]')).toBeEnabled();
-  await page.locator('li[data-label="Growth"]').click();
+  await expect(page.locator(`li[data-label="${testData.customerTier}"]`)).toBeEnabled();
+  await page.locator(`li[data-label="${testData.customerTier}"]`).click();
 
   await expect(page.getByRole('button', { name: 'Add Additional Support', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'Add Additional Support', exact: true }).click();
@@ -114,8 +114,8 @@ test('generated flow @sanity', async ({ page }) => {
   await expect(page.getByRole('button', { name: 'Continue', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'Continue', exact: true }).click();
 
-  await expect(page.locator('[id="customer::edit-' + testData.otp + '"]')).toBeEnabled();
-  await page.locator('[id="customer::edit-' + testData.otp + '"]').click();
+  await expect(page.locator('[id^="customer::edit-"]').first()).toBeEnabled();
+  await page.locator('[id^="customer::edit-"]').first().click();
 
   await expect(page.getByRole('button', { name: 'New Address', exact: true })).toBeEnabled();
   await page.getByRole('button', { name: 'New Address', exact: true }).click();
@@ -123,27 +123,27 @@ test('generated flow @sanity', async ({ page }) => {
   const companyInput = page.locator('input[name="address.company"][type="text"]');
   await expect(companyInput).toBeVisible();
   await expect(companyInput).toBeEditable();
-  await companyInput.fill('test_fio');
+  await companyInput.fill(testData.customerCompany);
 
   const attentionInput = page.locator('input[name="address.attention"][type="text"]');
   await expect(attentionInput).toBeVisible();
   await expect(attentionInput).toBeEditable();
-  await attentionInput.fill('vghh');
+  await attentionInput.fill(testData.customerAttention);
 
   const addressLine1Input = page.locator('input[name="address.address_line_one"][type="text"]');
   await expect(addressLine1Input).toBeVisible();
   await expect(addressLine1Input).toBeEditable();
-  await addressLine1Input.fill('bnbnb');
+  await addressLine1Input.fill(testData.customerAddressLine1);
 
   const addressLine2Input = page.locator('input[name="address.address_line_two"][type="text"]');
   await expect(addressLine2Input).toBeVisible();
   await expect(addressLine2Input).toBeEditable();
-  await addressLine2Input.fill('cvgdhcvhd');
+  await addressLine2Input.fill(testData.customerAddressLine2);
 
   const cityInput = page.locator('input[name="address.city"][type="text"]');
   await expect(cityInput).toBeVisible();
   await expect(cityInput).toBeEditable();
-  await cityInput.fill('vcgdhcvdhgc');
+  await cityInput.fill(testData.customerCity);
 
   const stateInput = page.locator('input[name="address.state"][type="text"]');
   await expect(stateInput).toBeVisible();
@@ -156,17 +156,17 @@ test('generated flow @sanity', async ({ page }) => {
   const postalCodeInput = page.locator('input[name="address.postal_code"][type="text"]');
   await expect(postalCodeInput).toBeVisible();
   await expect(postalCodeInput).toBeEditable();
-  await postalCodeInput.fill(testData.postalCode);
+  await postalCodeInput.fill(testData.customerPostalCode);
 
   const phoneInput = page.locator('input[name="address.phone_number"][type="phone"]');
   await expect(phoneInput).toBeVisible();
   await expect(phoneInput).toBeEditable();
-  await phoneInput.fill(testData.phone2);
+  await phoneInput.fill(testData.customerPhone);
 
   const addressLabelInput = page.locator('input[name="address.address_label"][type="text"]');
   await expect(addressLabelInput).toBeVisible();
   await expect(addressLabelInput).toBeEditable();
-  await addressLabelInput.fill('bvchdjchj');
+  await addressLabelInput.fill(testData.customerAddressLabel);
 
   const billingAddressCheckbox = page.locator('#addressbilling-addressbilling-billing-address');
   await expect(billingAddressCheckbox).toBeVisible();
