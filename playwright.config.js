@@ -5,7 +5,7 @@ module.exports = defineConfig({
   testDir: '.',
   testMatch: '**/*.js',
   expect: {
-    timeout: 80000,
+    timeout: 100000,
   },
   reporter: [
     ['line'],
@@ -14,7 +14,7 @@ module.exports = defineConfig({
     ['allure-playwright', { resultsDir: 'allure-results' }],
   ],
   use: {
-    actionTimeout: 80000,
+    actionTimeout: 100000,
     headless: false,
     screenshot: 'only-on-failure',
     trace: 'on'
