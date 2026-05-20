@@ -98,8 +98,9 @@ test('generated flow @regression', async ({ page }) => {
   await page.waitForTimeout(2000);
   await expect(page.getByRole('textbox', { name: 'Select Workflow' })).toBeEnabled();
   await page.getByRole('textbox', { name: 'Select Workflow' }).click();
-  
+  await page.waitForTimeout(2000);
   await expect(page.getByText('Blank Diecutter')).toBeVisible();
+  await page.waitForTimeout(3000);
   await page.getByText('Blank Diecutter').click();
 
   await expect(page.getByRole('textbox', { name: 'Select Plant' })).toBeEnabled();
