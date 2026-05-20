@@ -1,3 +1,4 @@
+import { timeout } from '../playwright.config';
 import testData from '../test-data.json';
 import { test, expect } from '@playwright/test';
 
@@ -154,7 +155,7 @@ test('create customer add address and edit details @regression', async ({ page }
   await page.waitForLoadState('domcontentloaded');
 
   const companyInput = page.locator('input[name="address.company"][type="text"]');
-  await expect(companyInput).toBeVisible();
+  await expect(companyInput).toBeVisible(timeout=2000);
   await expect(companyInput).toBeEditable();
   await companyInput.fill(testData.customerCompany);
 
