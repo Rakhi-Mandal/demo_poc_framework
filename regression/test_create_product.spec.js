@@ -1,7 +1,7 @@
 import testData from '../test-data.json';
 import { test, expect } from '@playwright/test';
 
-test('create product @sanity', async ({ page }) => {
+test('create product @regression', async ({ page }) => {
 
   // Login
   await page.goto(testData.url);
