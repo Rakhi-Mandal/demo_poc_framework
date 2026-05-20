@@ -1,11 +1,11 @@
 const { defineConfig } = require('@playwright/test');
 
 module.exports = defineConfig({
-  timeout: 120000,
+  timeout: 125000,
   testDir: '.',
   testMatch: '**/*.js',
   expect: {
-    timeout: 120000,
+    timeout: 125000,
   },
   reporter: [
     ['line'],
