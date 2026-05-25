@@ -55,6 +55,6 @@
   "estimateSpecialPackaging": "ghhje",
   "estimateQuantityInRoll": "23",
   "estimateQuantityInBox": "23",
-  "estimateFeetInRoll": "5"
-  
+  "estimateFeetInRoll": "5",
+  "inputText": "test_auto"
 }
